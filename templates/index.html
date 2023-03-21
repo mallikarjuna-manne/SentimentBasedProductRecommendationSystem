@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html >
+   <head>
+      <meta charset="UTF-8">
+      <title>Model Deployment</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+      <style>
+         body {
+         font-family: 'Tangerine', serif;
+         font-size: 28px;
+         }
+      </style>
+   </head>
+   <style>
+		#customers {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 80%;
+		}
+
+		#customers td,
+		#customers th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#customers tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		#customers tr:hover {
+			background-color: #ddd;
+		}
+
+		#customers th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: left;
+			background-color: #42C5C5;
+			color: white;
+		}
+
+		#table-wrapper {
+			position: relative;
+		}
+
+		#table-scroll {
+			height: 600px;
+			overflow: auto;
+			margin-top: 10px;
+		}
+
+		#table-wrapper table {
+			width: 100%;
+		}
+
+		#table-wrapper table * {
+			color: black;
+		}
+
+		#table-wrapper table thead th .text {
+			position: absolute;
+			top: -20px;
+			z-index: 2;
+			height: 80px;
+			width: 50%;
+			border: 1px solid red;
+		}
+
+		#arrangeContent {
+			position: absolute;
+			left: 10%;
+		}
+		}
+   </style>
+   <body>
+      <div>
+      <h2 style="text-align:center;background-color:#42C5C5">Sentiment Based Product Recommendation System</h2>
+      <form  action="{{ url_for('predict')}}"method="post">
+         <div  style="margin-left:24rem;">
+            <div class="form-group">
+               <label for="Username" style="font-size:20px;background-color:#42C5C5">Enter Username:</label>
+               <input type="text"  name="username" placeholder="User Name" required="required" />
+            </div>
+            <button align="left" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+         </div>
+      </form>
+      <div style="margin-left:24rem;">
+         <p>
+         <h1 style="color:#ff0000;font-size:40px;" >{{ message_display }}</h1>
+      </div>
+      <div id='arrangeContent' style="margin-right:18%">
+         {% if query%}
+         <div style="margin-left:24%">
+            <p><b>{{query}}</b>
+            <p>         
+            <div id="table-wrapper">
+               <div id="table-scroll">
+                  <table id="customers" >
+                     <tr>
+                        <th>S.no</th>
+                        <th>Product Name</th>
+                     </tr>
+                     {% for answer in output %}
+                     <tr>
+                        <td>{{answer[0]}}</td>
+                        <td>{{answer[1]}}</td>
+                     </tr>
+                     {% endfor %}
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+   {% endif %}
+</html>
