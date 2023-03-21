@@ -1,5 +1,5 @@
 # Project Name
-> Sentment Based Recommendation System
+> Sentment Based Product Recommendation System
 
 
 ## Table of Contents
